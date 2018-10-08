@@ -21,7 +21,7 @@ void main() {
         replace(path, data, "");
 
         // If the file is a cpk
-        if (strcmp(ext.c_str(), ".cpk") != 0) {
+        if (ext != ".cpk") {
             continue;
         }
         // To prevent loading the game's cpk we will check if it's in the ignoredCpks array.
