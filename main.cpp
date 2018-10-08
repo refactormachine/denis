@@ -13,7 +13,6 @@ void main() {
         }
         // Get file extension
         std::string ext = y->path().extension().string();
-        const char* extension = ext.c_str();
 
         // File path string
         std::string path = y->path().string();
@@ -21,25 +20,22 @@ void main() {
         // Replace the absolute data path with an empty string
         replace(path, data, "");
 
-        // Get final cpk file
-        const char* cpkFile = path.c_str();
-
         // If the file is a cpk
-        if (strcmp(extension, ".cpk") != 0) {
+        if (strcmp(ext.c_str(), ".cpk") != 0) {
             continue;
         }
         // To prevent loading the game's cpk we will check if it's in the ignoredCpks array.
-        if (value_exists_in_array(cpkFile, ignoreCpks, IGNORE_CPKS_SIZE)) {
+        if (value_exists_in_array(path.c_str(), ignoreCpks, IGNORE_CPKS_SIZE)) {
             continue;
         }
 
         // Replace the extension with an empty string
-        replace(path, extension, "");
+        replace(path, ext.c_str(), "");
 
         // Mount cpk
-        if (!MountCpk(cpkFile)) {
-            printf("File: %s could not be loaded.\n", cpkFile);
-        } else printf("%s was successfully loaded.\n", cpkFile);
+        if (!MountCpk(path.c_str())) {
+            printf("File: %s could not be loaded.\n", path.c_str());
+        } else printf("%s was successfully loaded.\n", path.c_str());
 
 
     }
